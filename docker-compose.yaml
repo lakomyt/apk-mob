@@ -2,15 +2,15 @@ version: '3.8'
 
 services:
   app:
-    build: ./app
+    build: .
     container_name: python_app
     ports:
       - "8000:8000"
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
-      MYSQL_USER: root
-      MYSQL_PASSWORD: pa$$w0rd
+      MYSQL_USER: user
+      MYSQL_PASSWORD: kjndfiuwfej
       MYSQL_DATABASE: mydb
     depends_on:
       - db
@@ -19,7 +19,9 @@ services:
     image: mysql:8.0
     container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: pa$$w0rd
+      MYSQL_ROOT_PASSWORD: kjndfiuwfej
+      MYSQL_USER: user
+      MYSQL_PASSWORD: kjndfiuwfej
       MYSQL_DATABASE: mydb
     ports:
       - "3306:3306"

@@ -6,6 +6,9 @@
 > 
 > `python -m venv venv && source venv/bin/activate`
 
+0. Setup database
+- Create user and database from `sql/db1.0.sql`.
+- Edit `config.py` to match your setup.
 
 1. Install required requirements
 ```bash
