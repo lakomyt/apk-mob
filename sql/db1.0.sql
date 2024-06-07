@@ -23,7 +23,7 @@ USE `mydb` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`users` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(128) NOT NULL,
+  `password` VARCHAR(256) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `points` MEDIUMINT(255) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`),
