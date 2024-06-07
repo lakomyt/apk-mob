@@ -100,3 +100,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO places (place_name, address, unlock_code, gps_lon, gps_lat) VALUES ('PWR A1', 'wybrzeze wyspianskiego 27', 'a1-kgs823SQK', 51.10755023045328, 17.06174918205241);
+INSERT INTO places (place_name, address, unlock_code, gps_lon, gps_lat) VALUES ('Habibi kebab', 'pl. grunwaldzki 4a', 'hk-hbl236POQ', 51.110324015855866, 17.055300744568495);
