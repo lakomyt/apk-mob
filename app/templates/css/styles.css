@@ -1,0 +1,149 @@
+body{
+    font-family: "Montserrat";
+    font-weight: 500;
+    text-align: center;
+}
+
+h2,h3 {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+p{
+    color: #8f8f8f;
+    font-size: 1.25rem;
+}
+
+
+/* section */
+.color-section{
+    background-color:  #6fcec9d7; 
+    color: #fff;
+}
+
+/* Navigation bar */
+.navbar-brand{
+    font-family: "Ubuntu";
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.navbar{
+    padding-bottom: 4.5rem;
+}
+.nav-item{
+    padding: 0 18px;
+}
+.nav-link{
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+.table{
+text-align: center; 
+border-color: #0E8388; 
+border-collapse: collapse; 
+border-style: solid;
+margin-left: auto;
+margin-right: auto;
+counter-reset: rowNumber -1;
+}
+.table tr {
+    counter-increment: rowNumber;
+  }
+  
+.table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+
+/* features */
+#puzzle1{
+    padding: 2rem 3%;
+    background-color: #fff;
+    position:relative;
+    
+}
+
+.text-puzzle:hover{
+    color:#0E8388;
+
+}
+.card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: 450px;
+    word-wrap: break-word;
+    background-color:#0E8388;
+    background-clip: border-box;
+    border-radius: 6px;
+    text-align: center;
+}
+.comment-box{
+    
+    padding:5px;
+}
+.comment-area textarea{
+    resize: none; 
+         border: 1px solid #ad9f9f;
+ }
+ .form-control:focus {
+    color: #0E8388;
+    background-color: #fff;
+    border-color: #ffffff;
+}
+
+.card-disp {
+    border: 0px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+}
+
+/* testimonials */
+#testimonials{
+    background-color:#ef8172;
+}
+.testimonial-text{
+    font-size: 3rem;  
+}
+.opinion{
+    border-radius: 100%;
+    width: 10%;
+    margin: 1.25rem;
+}
+.carousel-item{
+    padding:7% 15%;
+}
+#press{
+    background-color:#ef8172;
+    padding-bottom: 3%;
+}
+.logo{
+    width: 10%;
+    margin: 0 1.25rem 3.125rem 1.25rem;
+}
+/* Prices */
+#pricing{
+    padding: 6.25rem;
+}
+.pricing-text{
+    font-size: 3rem;  
+}
+.prices{
+    padding:3% 2%;
+}
+
+/* Encourage */
+
+#cta{
+    padding: 7% 10% 3%;
+}
+ 
+/* fotter */
+#footer{
+    margin: 2%;
+}
+.media{
+    margin: 0% 1%;
+}
