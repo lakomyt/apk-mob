@@ -84,8 +84,27 @@ def unlock_place(code, place_id, user_id):
 	res = c.fetchone()
 	if res is None:
 		return "Wrong unlock code"
-	else:
-		c.execute("INSERT INTO discoveries (user_id, place_id, discovery_date) VALUES (%s, %s, %s) ", [escape_string(user_id), escape_string(place_id), str(datetime.datetime.now())])
+	c.execute("INSERT INTO discoveries (user_id, place_id, discovery_date) VALUES (%s, %s, %s) ", [escape_string(user_id), escape_string(place_id), str(datetime.datetime.now())])
+	conn.commit()
+	c.close()
+	conn.close()
+
+def get_comments(place_id):
+	c, conn = connection()
+	c.execute("SELECT * FROM comments WHERE place_id=%s", [escape_string(place_id)])
+	res = c.fetchall()
+	for comment in res:
+		username = get_user_by_id(comment["user_id"])
+		comment["username"] = username
+	if res is None:
+		return []
+	c.close()
+	conn.close()
+	return res
+
+def add_comment(comment, place_id, user_id):
+	c, conn = connection()
+	c.execute("INSERT INTO comments (place_id, user_id, comment) VALUES (%s, %s, %s) ", [escape_string(place_id), escape_string(user_id), escape_string(comment)])
 	conn.commit()
 	c.close()
 	conn.close()

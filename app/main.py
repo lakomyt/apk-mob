@@ -92,20 +92,21 @@ def show_place(place_id):
             error_message = unlock_place(unlock_code, place_id, current_user.get_id())
             if not err:
                 return render_template('place-hidden.html', place_dict=place, error=error_message)
-        return render_template('place.html', place_dict=place)
+        comments = get_comments(place_id)
+        return render_template('place.html', place_dict=place, discovery_date=discovery, comments_dict=comments)
 
-@app.route('/place/<place_id>/comments', methods = ["POST"])
+@app.route('/place/<place_id>/add_comment', methods = ["POST"])
 @login_required
-def show_comments(place_id):
+def add_comments(place_id):
     if session["name"] == None:
         return redirect(url_for('index'))
     else:
         if request.method == "POST":
             new_comment = request.form["comment_content"]
-            add_comment(new_comment)
-        place = get_place(place_id)
-        comments = get_comments(place_id)
-        return render_template('comment.html', comments_list = comments, place_name=place["place_name"])
+            add_comment(new_comment, place_id, current_user.get_id())
+        else:
+            return redirect(url_for('show_places'))
+        return redirect(url_for('show_places'))
 
 @app.route('/logout')
 @login_required
