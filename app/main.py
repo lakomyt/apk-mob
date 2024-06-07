@@ -52,7 +52,7 @@ def show_places():
         places = get_places_list() # lista obiektów klasy Place
         return render_template('places.html', places_list = places)
 
-@app.route('/place/<place_id>/') #do przemyslenia
+@app.route('/place/<place_id>/',methods = ["POST"]) #do przemyslenia
 def show_place(place_id):
     if session["name"] == None
         return redirect(url_for('index'))
@@ -75,7 +75,7 @@ def show_place(place_id):
 
 
 
-@app.route('/place/<place_id>/comments')
+@app.route('/place/<place_id>/comments', methods = ["POST"])
 def show_comments(place_id):
     if session["name"] == None
         return redirect(url_for('index'))
