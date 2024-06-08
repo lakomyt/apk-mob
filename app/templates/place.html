@@ -78,8 +78,8 @@
                   <h3>Ostatnie komentarze</h3> 
                   {% for item in comments.comment%}
                     <div style="text-align: left">
-                        <h3>{{comments.user_id.item}}</h3>
-                        <p>{{comments.comment.item}}</p>
+                        <h3>{{comments_dict[username]}}</h3>
+                        <p>{{comments_dict[comment]}}</p>
                     </div>
                   {% endfor %}
           </div>
