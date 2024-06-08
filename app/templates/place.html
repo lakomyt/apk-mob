@@ -55,14 +55,11 @@
           </section>
 
         <section id="title" class="color-section" style="padding-bottom: 3rem;">
-            <h3>{{place.name}}</h3>
+            <h3>{{place_dict['place_name']}}</h3>
         </section>
 
         <br><br>
-         <h3>{{place.address}}</h3>
-        <br><br>
-        <label>Kod:</label>
-        <input type="text" name="code" value="">
+         <h3>{{place_dict['address']}}</h3>
         <br><br>
         {% if odkryte == true %}
           <div class="card" >
