@@ -48,7 +48,7 @@ def create_user(username, email, passwd):
 
 def get_places_list():
 	c, conn = connection()
-	c.execute("SELECT place_name FROM places")
+	c.execute("SELECT place_id, place_name FROM places")
 	res = c.fetchall()
 	if res is None:
 		return None
