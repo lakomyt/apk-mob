@@ -17,7 +17,7 @@
       integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
       crossorigin="anonymous"></script>
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <!-- Czcionka -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,10 +39,9 @@
         <br><br>
         <input type="submit" value="Zaloguj">
         <br><br>
-        <a href="register.html">Zarejestruj się</a>
+        <a href="{{ url_for('register_page') }}">Zarejestruj się</a>
       </form>
     </div>
-    {{ error }}
  
 </body>
 </html>
