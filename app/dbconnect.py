@@ -108,3 +108,17 @@ def add_comment(comment, place_id, user_id):
 	conn.commit()
 	c.close()
 	conn.close()
+
+def get_top10_players():
+	c, conn = connection()
+	query = """
+	    SELECT username
+	    FROM users 
+	    ORDER BY points DESC 
+	    LIMIT 10
+	"""
+	c.execute(query)
+	res = c.fetchall()
+	c.close()
+	conn.close()
+	return res

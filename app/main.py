@@ -62,9 +62,6 @@ def register_page():
 @app.route("/rating/")
 @login_required
 def show_rating():
-    if session["name"] == None:
-        return redirect(url_for('index'))
-    else:
         players = get_top10_players() #dododania funkcja zczytująca pierwsze 10 graczy
         return render_template("ranking.html",players_list = players)
 
@@ -80,9 +77,6 @@ def show_places():
 @app.route('/place/<place_id>/', methods = ["POST", "GET"])
 @login_required
 def show_place(place_id):
-    if session["name"] == None:
-        return redirect(url_for('index'))
-    else:
         place = get_place(place_id)
         discovery = get_discovery(current_user.get_id(), place_id) #boolean sprawdza czy discovery dla uzytkownika jest w bazie
         if discovery is None:
@@ -90,7 +84,7 @@ def show_place(place_id):
         elif request.method == "POST":
             unlock_code = request.form['unlock_code']
             error_message = unlock_place(unlock_code, place_id, current_user.get_id())
-            if not err:
+            if not error_message:
                 return render_template('place-hidden.html', place_dict=place, error=error_message)
         comments = get_comments(place_id)
         return render_template('place.html', place_dict=place, discovery_date=discovery, comments_dict=comments)
@@ -98,9 +92,6 @@ def show_place(place_id):
 @app.route('/place/<place_id>/add_comment', methods = ["POST"])
 @login_required
 def add_comments(place_id):
-    if session["name"] == None:
-        return redirect(url_for('index'))
-    else:
         if request.method == "POST":
             new_comment = request.form["comment_content"]
             add_comment(new_comment, place_id, current_user.get_id())
@@ -111,8 +102,9 @@ def add_comments(place_id):
 @app.route('/logout')
 @login_required
 def logout():
-   session.pop('username', None)
+   logout_user()
+   flash("Poprawnie wylogowano")
    return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0", port = "8080", debug="True")
+    app.run(host = "0.0.0.0", port = 8080, debug="True")
