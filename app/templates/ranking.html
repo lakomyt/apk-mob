@@ -60,17 +60,16 @@
         <table class="table">
         <thead>
             <tr>
-                <th>Miejsce</th>
+                <th>Punkty</th>
                 <th>Nick</th>
                 
             </tr>
         </thead>
         <tbody>
-          {% for player in players %}
+          {% for player in players_list %}
             <tr>
-                <td scope="row"></td>
-                <td>player</td>
-                
+                <td>{{ player["points"] }}</td>
+                <td>{{ player["username"] }}</td>
             </tr>
           {% endfor %}
         </tbody>

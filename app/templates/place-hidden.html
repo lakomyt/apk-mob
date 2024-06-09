@@ -62,8 +62,9 @@
          <h3>{{place_dict['address']}}</h3>
         <br><br>
         <label>Kod:</label>
-        <form method="POST">
-        <input type="text" name="code" value="">
+        <form method="POST" action="/place/{{ place_dict['place_id'] }}">
+        <input type="text" name="unlock_code">
+        <input type="submit">
         </form>
         <br><br>
     </body>

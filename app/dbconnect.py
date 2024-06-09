@@ -80,14 +80,32 @@ def get_discovery(user_id, place_id):
 
 def unlock_place(code, place_id, user_id):
 	c, conn = connection()
-	c.execute("SELECT place_id FROM places WHERE unlock_code=%s", [escape_string(code)])
+	c.execute("SELECT place_id,points_value FROM places WHERE unlock_code=%s", [escape_string(code)])
 	res = c.fetchone()
 	if res is None:
 		return "Wrong unlock code"
 	c.execute("INSERT INTO discoveries (user_id, place_id, discovery_date) VALUES (%s, %s, %s) ", [escape_string(user_id), escape_string(place_id), str(datetime.datetime.now())])
 	conn.commit()
+	c.execute("UPDATE users SET points = points + %s WHERE user_id = %s", [res['points_value'], escape_string(user_id)])
+	conn.commit()
+	c.execute("UPDATE places SET points_value = points_value - 10 WHERE place_id = %s", [escape_string(place_id)])
+	conn.commit()
 	c.close()
 	conn.close()
+
+def get_top10_players():
+	c, conn = connection()
+	query = """
+	    SELECT username,points
+	    FROM users 
+	    ORDER BY points DESC 
+	    LIMIT 10
+	"""
+	c.execute(query)
+	res = c.fetchall()
+	c.close()
+	conn.close()
+	return res
 
 def get_comments(place_id):
 	c, conn = connection()

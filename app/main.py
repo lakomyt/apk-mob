@@ -80,18 +80,20 @@ def show_places():
 @app.route('/place/<place_id>/', methods = ["POST", "GET"])
 @login_required
 def show_place(place_id):
+    error_message = None
     if session["name"] == None:
         return redirect(url_for('index'))
     else:
         place = get_place(place_id)
         discovery = get_discovery(current_user.get_id(), place_id) #boolean sprawdza czy discovery dla uzytkownika jest w bazie
-        if discovery is None:
-            return render_template('place-hidden.html', place_dict=place)
-        elif request.method == "POST":
+        if request.method == "POST":
             unlock_code = request.form['unlock_code']
             error_message = unlock_place(unlock_code, place_id, current_user.get_id())
-            if not err:
+            if error_message:
                 return render_template('place-hidden.html', place_dict=place, error=error_message)
+            return redirect(url_for('show_places'))
+        elif discovery is None:
+            return render_template('place-hidden.html', place_dict=place)
         comments = get_comments(place_id)
         return render_template('place.html', place_dict=place, discovery_date=discovery, comments_dict=comments)
 
