@@ -41,6 +41,11 @@
         <br><br>
         <a href="{{ url_for('register_page') }}">Zarejestruj się</a>
       </form>
+        {% if error %}
+        <div id="errormessage">
+            {{error}}
+        </div>
+        {% endif %}
     </div>
  
 </body>

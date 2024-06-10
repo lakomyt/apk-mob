@@ -47,10 +47,12 @@ def register_page():
         new_password = request.form['password']
         new_password_confirm = request.form['password_confirm']
 
-        if new_username and new_password and new_password == new_password_confirm and '@' in new_email:
+        if new_username and new_password and new_password == new_password_confirm and '@' in new_email and check_unique(new_username):
             new_password_hash = generate_password_hash(new_password)
             error_message = create_user(new_username, new_email, new_password_hash) #funkcja rejestrująca
             return redirect(url_for("login_page"))
+        elif check_unique(new_username) == False:
+            error_message = "Login zajęty"
         elif new_password != new_password_confirm:
             error_message = "Hasła muszą się zgadzać"
         elif '@' not in new_email:
