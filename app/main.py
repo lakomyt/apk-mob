@@ -59,7 +59,7 @@ def register_page():
             error_message = "Uzupełnij wszystkie pola"
     return render_template("register.html", error = error_message)
 
-@app.route("/rating/")
+@app.route("/ranking/")
 @login_required
 def show_rating():
     if session["name"] == None:
@@ -114,7 +114,8 @@ def add_comments(place_id):
 @login_required
 def logout():
    session.pop('username', None)
-   return redirect(url_for('index'))
+   logout_user()
+   return redirect(url_for('login_page'))
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port = "8080", debug="True")
