@@ -82,12 +82,9 @@ def get_discovery(user_id, place_id):
 	c, conn = connection()
 	c.execute("SELECT discovery_date FROM discoveries WHERE user_id=%s AND place_id=%s", [escape_string(user_id), escape_string(place_id)])
 	res = c.fetchone()
-	if res is None:
-		return None
-	place = res
 	c.close()
 	conn.close()
-	return place
+	return res
 
 def unlock_place(code, place_id, user_id):
 	c, conn = connection()
@@ -123,8 +120,8 @@ def get_comments(place_id):
 	c.execute("SELECT * FROM comments WHERE place_id=%s", [escape_string(place_id)])
 	res = c.fetchall()
 	for comment in res:
-		username = get_user_by_id(comment["user_id"])
-		comment["username"] = username
+		user = get_user_by_id(comment["user_id"])
+		comment["username"] = user["username"]
 	if res is None:
 		return []
 	c.close()

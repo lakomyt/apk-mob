@@ -15,7 +15,6 @@ login_manager.login_message = "Zaloguj się aby uzyskać dostęp"
 
 @login_manager.user_loader
 def load_user(key):
-    print(key)
     return get_user_by_id(key)
 
 #main page with login
@@ -87,6 +86,8 @@ def show_place(place_id):
         return redirect(url_for('index'))
     else:
         place = get_place(place_id)
+        if not place:
+            return redirect(url_for('show_places'))
         discovery = get_discovery(current_user.get_id(), place_id) #boolean sprawdza czy discovery dla uzytkownika jest w bazie
         if request.method == "POST":
             unlock_code = request.form['unlock_code']
@@ -95,7 +96,7 @@ def show_place(place_id):
                 return render_template('place-hidden.html', place_dict=place, error=error_message)
             return redirect(url_for('show_places'))
         elif discovery is None:
-            return render_template('place-hidden.html', place_dict=place)
+            return render_template('place-hidden.html', place_dict=place, error="Miejsce zablokowane")
         comments = get_comments(place_id)
         return render_template('place.html', place_dict=place, discovery_date=discovery, comments_dict=comments)
 
@@ -110,7 +111,7 @@ def add_comments(place_id):
             add_comment(new_comment, place_id, current_user.get_id())
         else:
             return redirect(url_for('show_places'))
-        return redirect(url_for('show_places'))
+        return redirect(f"/place/{place_id}")
 
 @app.route('/logout')
 @login_required
