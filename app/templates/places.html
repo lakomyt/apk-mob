@@ -36,19 +36,21 @@
               aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-    
+
             <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
-              <ul class="navbar-nav ms-auto">
+             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                   <a class="nav-link" href="#placespage">Strona Główna</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="ranking.html">Ranking</a>
+                  <a class="nav-link" href="/ranking">Ranking</a>
                 </li>
-                
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Wyloguj</a>
+                </li>
               </ul>
             </div>
-          </nav>        
+          </nav>
           </div>
         </div>
       </section>
@@ -62,6 +64,6 @@
           </svg> {{ place['place_name'] }}</button></a>
         </div>
       {% endfor %}
-      
+
 </body>
 </html>

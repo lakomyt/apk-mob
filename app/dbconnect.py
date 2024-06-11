@@ -46,6 +46,17 @@ def create_user(username, email, passwd):
 	c.close()
 	conn.close()
 
+
+def check_unique(username):
+    c, conn = connection()
+    c.execute("SELECT * FROM users WHERE username=%s", [escape_string(username)])
+    res = c.fetchone()
+    c.close()
+    conn.close()
+    if res:
+        return False
+    return True
+
 def get_places_list():
 	c, conn = connection()
 	c.execute("SELECT place_id, place_name FROM places")

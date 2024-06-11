@@ -47,10 +47,12 @@ def register_page():
         new_password = request.form['password']
         new_password_confirm = request.form['password_confirm']
 
-        if new_username and new_password and new_password == new_password_confirm and '@' in new_email:
+        if new_username and new_password and new_password == new_password_confirm and '@' in new_email and check_unique(new_username):
             new_password_hash = generate_password_hash(new_password)
             error_message = create_user(new_username, new_email, new_password_hash) #funkcja rejestrująca
             return redirect(url_for("login_page"))
+        elif check_unique(new_username) == False:
+            error_message = "Login zajęty"
         elif new_password != new_password_confirm:
             error_message = "Hasła muszą się zgadzać"
         elif '@' not in new_email:
@@ -59,7 +61,7 @@ def register_page():
             error_message = "Uzupełnij wszystkie pola"
     return render_template("register.html", error = error_message)
 
-@app.route("/rating/")
+@app.route("/ranking/")
 @login_required
 def show_rating():
     if session["name"] == None:
@@ -114,7 +116,8 @@ def add_comments(place_id):
 @login_required
 def logout():
    session.pop('username', None)
-   return redirect(url_for('index'))
+   logout_user()
+   return redirect(url_for('login_page'))
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port = "8080", debug="True")
