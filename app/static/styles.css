@@ -141,3 +141,8 @@ margin-right: auto;
 .media{
     margin: 0% 1%;
 }
+#map {
+    height: 400px;
+    width: 80%;
+    margin: auto;
+}

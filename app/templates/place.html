@@ -23,7 +23,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Ubuntu&display=swap"
           rel="stylesheet">
-
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     </head>
 
     <body>
@@ -64,6 +65,17 @@
         <br><br>
          adres: <h4>{{place_dict['address']}}</h4>
          lokalizacja: <h4>{{ place_dict['gps_lon'] }}, {{ place_dict['gps_lat'] }}</h4>
+         <div id="map"></div>
+         <script>
+           //var map = L.map('map').fitWorld();
+           var map = L.map('map').setView([{{place_dict['gps_lon']}}, {{place_dict['gps_lat'] }}], 14);
+           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+           }).addTo(map);
+           L.marker([{{ place_dict['gps_lon'] }}, {{ place_dict['gps_lat'] }}]).addTo(map)
+           .bindPopup("{{ place_dict['place_name'] }}")
+           .openPopup();
+         </script>
          aktualna wartość: <h4>{{ place_dict['points_value'] }}</h4>
         <br><br>
           <div class="card" >
